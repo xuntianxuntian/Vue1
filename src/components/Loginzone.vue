@@ -64,46 +64,44 @@ export default {
         
   },
   methods:{
+      //label标签被点击  修改标签样式，设置异步执行函数，执行监听click事件，进行原样式恢复的鉴别
       labelmove:function (event){
         if(document.getElementById("username").value===""){
-        console.log(this.idchange),
+        // console.log(this.$store.state.isRegister),
         this.labelactiveid=!this.labelactiveid,
         this.idchange = !this.idchange,
-        console.log(this.ischange),
-        //   alert(this.labelactive),
         setTimeout(()=>{document.addEventListener("click",this.changeX)},0)
         }
       },
+      //鼠标点击事件监听，判定是否恢复label样式，input存在输入，则保持，为空则恢复样式
       changeX:function (event){
-        //    alert('change'),
+        
         if(document.getElementById("username").value===""){
-            // document.getElementById("username").value="",
             this.labelactiveid=!this.labelactiveid,
             this.idchange = !this.idchange,
             document.removeEventListener("click",this.changeX)
-        //    this.remove()
+        
         }
       }, 
+
+      //密码input的样式修改及监听
       labelmove2:function (event){
           if(document.getElementById("psw").value===""){
           this.labelactivepsw=!this.labelactivepsw,
           this.pswchange = !this.pswchange,
-        //   alert(this.labelactive),
         setTimeout(()=>{document.addEventListener("click",this.changeY)},0)
           }
       },
       changeY:function (event){ 
-        //    alert('change'),
         if(document.getElementById("psw").value===""){
-            // document.getElementById("username").value="",
             this.labelactivepsw=!this.labelactivepsw,
             this.pswchange = !this.pswchange,
             document.removeEventListener("click",this.changeY)
-        //    this.remove()
         }
       } ,
+
+      //输入信息提示，鼠标监听，由于需要在子层级添加鼠标事件对display的影响，不使用hover修改父层样式
       showIdInfo:function(event){
-        //   console.log(this.idInfo),
           this.idInfo=!this.idInfo,
           this.idDisplayChange = "inline-block",
           setTimeout(() => {
@@ -121,7 +119,6 @@ export default {
 
       },
       showPswInfo:function(event){
-        //   console.log(this.pswInfo),
           this.pswInfo=!this.pswInfo,
            this.pswDisplayChange = "inline-block",
           setTimeout(() => {
@@ -135,8 +132,9 @@ export default {
           if(this.pswInfo){this.pswDisplayChange = "inline-block"  }else{this.pswDisplayChange = "none"}          
           }, 1000)
       },
+
+      //登录按钮的样式修改
       loginTo:function(){
-          console.log(document.getElementById("username").value);
           if(document.getElementById("username").value!==""&&document.getElementById("psw").value!==""){
           this.buttonValue = "正在登录,请稍后.."
           }else{
@@ -168,10 +166,11 @@ li{
 }
 a{
     color: white;
-    font:14px/1.5 Arial,'\5b8b\4f53',sans-serif;
+    font:1rem/1.5 Arial,'\5b8b\4f53',sans-serif;
     /* font-size: 1.1rem;
     font-family: Arial; */
 }
+
 #loginzone{
     width: 450px;
     height: auto;
@@ -185,6 +184,53 @@ a{
     background-color: rgba(255,255,255,0.85);
     border-radius: 5px;
 
+}
+@media  (max-width:500px){
+    #loginzone{
+        width: 100% ;
+        height: 100%;
+        position: relative;
+        margin: 0;
+        padding: 30px 5px 35px 5px ;
+        background-color: rgba(255,255,255,0.85);
+        border-radius: 5px;
+    }
+}
+@media  (max-width:500px){
+    #loginzone h2{
+        color: red;
+    }
+}
+@media  (max-width:500px){
+    #loginzone #infoId,#loginzone #infoPsw{
+        left: 220px;
+    }
+}
+@media  (max-width:500px){
+    #loginzone ul input{
+        margin-left: 40px;
+    }
+}
+@media screen and (max-width: 500px){
+#loginzone .infoContent{
+    left: -160px;
+    top: 50px;
+    width: 180px;
+    box-shadow: 3px 3px 8px rgb(112, 112, 112);
+    padding:5px 5px 5px 15px;
+    font:1rem/1.5 Arial,'\5b8b\4f53',sans-serif;
+    /* font-size: 1.1rem;
+    font-family: Arial !important; */
+}
+}
+@media  (max-width:500px){   
+#loginzone .graphic::before{
+    border-width: 0 10px 10px 10px;
+    border-color: transparent  transparent #324b5c transparent ;
+    position: absolute;
+    left: 165px;
+    top: -10px;
+}
 }
 #userId,.psw{
     width: 80%;
@@ -264,6 +310,7 @@ label{
 /* label .label1{
     top: 261px;
 } */
+
 #infoId,#infoPsw{
     display: block;
     position: absolute;
@@ -278,7 +325,9 @@ label{
     background-repeat: no-repeat;
     background-size: 360%;
     position: absolute;
+    z-index: 4;
 }
+
 
 .infoContent{
     display: inline-block;
@@ -298,6 +347,7 @@ label{
     opacity: 0;
     transition: opacity 0.6s !important;
     -webkit-transition: opacity 0.6s !important;
+    z-index: 101;
 }   
 .graphic::before{
     content: "";
@@ -333,6 +383,7 @@ ul input{
     position: absolute;
     width: 70%;
     margin-top: 2px;
+    text-align: center;
     /* height: 2em; */
     /* border: 1px,solid,#f40; */
     background: none;

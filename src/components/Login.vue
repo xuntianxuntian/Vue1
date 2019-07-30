@@ -1,7 +1,7 @@
 <template>
   <div id="login">
-    <Loginzone/>
-    <Registerzone/>
+    <Loginzone></Loginzone>
+    <Registerzone></Registerzone>
   </div>
 </template>
 
@@ -10,6 +10,9 @@ import Registerzone from '../components/Registerzone'
 import Loginzone from '../components/Loginzone'
 export default {
   name:"",
+  props:[
+    
+  ],
   components: {
     Registerzone,
     Loginzone,
